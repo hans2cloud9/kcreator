@@ -36,6 +36,11 @@ body {
   margin: 0 auto;
 }
 
+/* 페이지 타이틀 숨기기 */
+.notion-title {
+  display: none;
+}
+
 /* 네비게이션 바 스타일 */
 .bullet-navbar {
   background-color: white;
@@ -112,14 +117,14 @@ body {
 
 /* 링크 스타일 */
 .notion-link {
-  color: var(--tertiary-color);
+  color: white;
   transition: all 0.3s ease;
   text-decoration: none;
   font-weight: 500;
 }
 
 .notion-link:hover {
-  color: var(--primary-color);
+  color: rgba(255, 255, 255, 0.85);
   text-decoration: underline;
 }
 
@@ -211,6 +216,29 @@ body {
   width: var(--container-width);
   max-width: 90%;
   margin: 0 auto;
+}
+
+/* 소셜 미디어 링크 버튼 스타일 */
+.social-media-links .notion-link,
+.social-links .notion-link {
+  display: inline-block;
+  background-color: var(--primary-color);
+  color: white;
+  padding: 8px 16px;
+  border-radius: var(--border-radius);
+  text-align: center;
+  min-width: 120px;
+  font-weight: 500;
+  margin: 0 5px;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.social-media-links .notion-link:hover,
+.social-links .notion-link:hover {
+  background-color: var(--accent-color);
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(254, 67, 101, 0.3);
 }
 
 /* 미디어 쿼리 - 모바일 대응 */
