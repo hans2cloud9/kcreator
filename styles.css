@@ -12,12 +12,12 @@
   /* 글꼴 설정 */
   --primary-font: "Pretendard", sans-serif;  /* 한글용 폰트 */
   --heading-font: "Pretendard", sans-serif;  /* 제목용 폰트 */
-  --english-font: "Comic Sans MS", "Marker Felt", cursive;  /* 영문용 귀여운 폰트 */
+  --english-font: "Pretendard", sans-serif;  /* 영문용 폰트 - 수정: 네비바 통일 */
   
   /* 크기 및 간격 */
   --border-radius: 12px;        /* 모서리 둥글기 */
-  --container-width: 85%;       /* 컨테이너 너비 */
-  --notion-max-width: 85%;      /* 노션 최대 너비 */
+  --container-width: 1088px;    /* 컨테이너 너비 - 수정: 데스크탑 너비 */
+  --notion-max-width: 1088px;   /* 노션 최대 너비 - 수정: 데스크탑 너비 */
   
   /* 네비게이션 바 */
   --navbar-height: 80px;
@@ -77,7 +77,8 @@ body {
 .notion-page {
   background: var(--bg-color);
   padding: 0;
-  max-width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
 }
 
 .notion-full-width {
@@ -92,9 +93,10 @@ body {
   border-bottom: 2px solid var(--primary-color);
 }
 
+/* 네비바 로고 수정 - 다른 네비 항목과 같은 폰트 적용 */
 .navbar-brand > .navbar-item {
-  font-family: var(--english-font);
-  font-size: 2rem;
+  font-family: var(--primary-font);
+  font-size: 1.5rem;
   font-weight: 700;
   color: var(--primary-color);
 }
@@ -125,6 +127,12 @@ body {
   background-color: var(--alt-pink);
   transform: translateY(-2px);
   box-shadow: 0 4px 10px rgba(254, 67, 101, 0.3);
+}
+
+/* 컨테이너 너비 설정 */
+.notion-frame {
+  max-width: var(--container-width);
+  margin: 0 auto;
 }
 
 /* 제목 스타일링 */
@@ -449,11 +457,51 @@ body {
   margin-bottom: 1rem;
 }
 
+/* Testimonial 섹션 스타일링 - 콜아웃 겹침 문제 해결 */
+/* 컬럼 레이아웃 조정 */
+.testimonials-section .bullet-2-column,
+.testimonials-section .bullet-3-column,
+.testimonials-section .bullet-4-column {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+/* 각 콜아웃 블록 스타일링 */
+.testimonials-section .notion-callout {
+  width: 100%;
+  margin: 15px 0;
+  box-sizing: border-box;
+  position: relative;
+  overflow: visible;
+}
+
+/* 인용 표시 추가 */
+.testimonials-section .notion-callout::before {
+  content: """;
+  position: absolute;
+  top: -20px;
+  left: 20px;
+  font-size: 60px;
+  color: var(--primary-color);
+  opacity: 0.3;
+}
+
+/* 이름과 국가 스타일링 */
+.testimonials-section .notion-callout strong {
+  display: block;
+  margin-bottom: 8px;
+  color: var(--primary-color);
+  font-size: 1.2rem;
+}
+
 /* 큰 화면에서의 너비 조정 */
 @media (min-width: 1200px) {
-  :root {
-    --container-width: 75%;
-    --notion-max-width: 75%;
+  .notion-page, 
+  .notion-frame {
+    max-width: var(--container-width);
+    margin: 0 auto;
   }
 }
 
@@ -465,8 +513,17 @@ body {
     --heading3: calc(var(--heading-font-size) * 1.3);
   }
   
-  .notion-page {
-    padding: 0 40px;
+  .notion-page,
+  .notion-frame {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+  
+  /* Testimonial 섹션 레이아웃 조정 */
+  .testimonials-section .bullet-2-column,
+  .testimonials-section .bullet-3-column,
+  .testimonials-section .bullet-4-column {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -478,12 +535,14 @@ body {
     --heading3: calc(var(--heading-font-size) * 1.2);
   }
   
-  .notion-page {
-    padding: 0 20px;
+  .notion-page,
+  .notion-frame {
+    max-width: 90%;
+    margin: 0 auto;
   }
   
   .navbar-brand > .navbar-item {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
   }
   
   .notion-text {
@@ -511,110 +570,13 @@ body {
   }
 }
 
-/* 영어 텍스트에 귀여운 폰트 적용 */
+/* 영어 텍스트에 일관된 폰트 적용 */
 [lang="en"] {
-  font-family: var(--english-font);
+  font-family: var(--primary-font);
 }
 
 /* 커스텀 파도 효과 */
 .wave-divider {
   width: 100vw;
   margin-left: calc(-50vw + 50%);
-  margin-right: calc(-50vw + 50%);
-  height: 100px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23ffffff'%3E%3C/path%3E%3C/svg%3E");
-  background-size: cover;
-  background-position: center bottom;
-}
-
-/* CTA 섹션 스타일 */
-.cta-section {
-  background-color: var(--primary-color);
-  padding: 4rem 2rem;
-  text-align: center;
-  border-radius: var(--border-radius);
-  margin: 3rem 0;
-  color: white;
-}
-
-.cta-section h2 {
-  font-size: 2.5rem;
-  margin-bottom: 1.5rem;
-  color: white;
-}
-
-.cta-section .bullet-btn {
-  background-color: white;
-  color: var(--primary-color);
-  font-weight: 700;
-  margin-top: 1rem;
-}
-
-.cta-section .bullet-btn:hover {
-  background-color: var(--light-yellow);
-}
-
-/* 특별 효과 - 한글 강조 표시 */
-.korean-highlight {
-  position: relative;
-  display: inline-block;
-  padding: 0 5px;
-}
-
-.korean-highlight::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 8px;
-  background-color: var(--light-yellow);
-  z-index: -1;
-  border-radius: 4px;
-}
-
-/* 플래시카드 효과 */
-.flashcard {
-  perspective: 1000px;
-  height: 180px;
-  margin: 1.5rem 0;
-  cursor: pointer;
-}
-
-.flashcard-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  border-radius: var(--border-radius);
-}
-
-.flashcard:hover .flashcard-inner {
-  transform: rotateY(180deg);
-}
-
-.flashcard-front, .flashcard-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  border-radius: var(--border-radius);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  padding: 1rem;
-}
-
-.flashcard-front {
-  background-color: white;
-  color: var(--text-color);
-}
-
-.flashcard-back {
-  background-color: var(--accent-color);
-  color: white;
-  transform: rotateY(180deg);
-}
+  margin-right:
