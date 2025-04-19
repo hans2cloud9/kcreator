@@ -457,43 +457,83 @@ body {
   margin-bottom: 1rem;
 }
 
-/* Testimonial 섹션 스타일링 - 콜아웃 겹침 문제 해결 */
-/* 컬럼 레이아웃 조정 */
-.testimonials-section .bullet-2-column,
-.testimonials-section .bullet-3-column,
-.testimonials-section .bullet-4-column {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(480px, 1fr));
-  gap: 20px;
-  width: 100%;
+/* ---------- Testimonial 섹션 스타일링 - 중요한 수정 부분 ---------- */
+/* 모든 컬럼 관련 요소의 기본 스타일 초기화 */
+.bullet-2-column,
+.bullet-3-column,
+.bullet-4-column {
+  display: block !important;
+  width: 100% !important;
 }
 
-/* 각 콜아웃 블록 스타일링 */
-.testimonials-section .notion-callout {
-  width: 100%;
-  margin: 15px 0;
-  box-sizing: border-box;
-  position: relative;
-  overflow: visible;
+/* 컬럼의 기본 여백 제거 */
+.notion-column {
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
-/* 인용 표시 추가 */
-.testimonials-section .notion-callout::before {
-  content: """;
-  position: absolute;
-  top: -20px;
-  left: 20px;
-  font-size: 60px;
-  color: var(--primary-color);
-  opacity: 0.3;
+/* Testimonial 제목 스타일링 */
+.notion-page h1:contains("Testimonials") {
+  margin-bottom: 40px;
 }
 
-/* 이름과 국가 스타일링 */
-.testimonials-section .notion-callout strong {
-  display: block;
-  margin-bottom: 8px;
-  color: var(--primary-color);
-  font-size: 1.2rem;
+/* testimonial 섹션의 컬럼 레이아웃 강제 조정 */
+.bullet-2-column .notion-column {
+  width: 45% !important;
+  display: inline-block !important;
+  vertical-align: top !important;
+  margin: 0 2.5% !important;
+}
+
+/* testimonial 섹션의 콜아웃 스타일링 */
+.bullet-2-column .notion-callout {
+  width: 100% !important;
+  margin: 15px 0 !important;
+  box-sizing: border-box !important;
+  background-color: rgba(255, 228, 230, 0.7) !important;
+  border-radius: 15px !important;
+  box-shadow: 0 4px 15px rgba(254, 67, 101, 0.1) !important;
+}
+
+/* testimonial 이름과 국가 스타일링 */
+.bullet-2-column .notion-callout strong {
+  display: block !important;
+  margin-bottom: 10px !important;
+  color: var(--primary-color) !important;
+  font-size: 1.3rem !important;
+}
+
+/* testimonial 아이콘 숨기기 */
+.bullet-2-column .notion-callout .notion-page-icon-inline {
+  display: none !important;
+}
+
+/* 인용문 표시 스타일링 */
+.bullet-2-column .notion-callout {
+  position: relative !important;
+}
+
+.bullet-2-column .notion-callout::before {
+  content: '"' !important;
+  position: absolute !important;
+  font-size: 60px !important;
+  color: var(--primary-color) !important;
+  opacity: 0.2 !important;
+  top: -15px !important;
+  left: 15px !important;
+}
+
+.bullet-2-column .notion-callout-text {
+  margin-left: 20px !important;
+  position: relative !important;
+  z-index: 2 !important;
+}
+
+/* 콜아웃 내 텍스트 스타일링 */
+.bullet-2-column .notion-callout .notion-text {
+  font-size: 1rem !important;
+  line-height: 1.6 !important;
+  color: #444 !important;
 }
 
 /* 큰 화면에서의 너비 조정 */
@@ -519,11 +559,11 @@ body {
     margin: 0 auto;
   }
   
-  /* Testimonial 섹션 레이아웃 조정 */
-  .testimonials-section .bullet-2-column,
-  .testimonials-section .bullet-3-column,
-  .testimonials-section .bullet-4-column {
-    grid-template-columns: 1fr;
+  /* Testimonial 반응형 조정 */
+  .bullet-2-column .notion-column {
+    width: 100% !important;
+    display: block !important;
+    margin: 15px 0 !important;
   }
 }
 
@@ -579,4 +619,101 @@ body {
 .wave-divider {
   width: 100vw;
   margin-left: calc(-50vw + 50%);
-  margin-right:
+  margin-right: calc(-50vw + 50%);
+  height: 100px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120' preserveAspectRatio='none'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23ffffff'%3E%3C/path%3E%3C/svg%3E");
+  background-size: cover;
+  background-position: center bottom;
+}
+
+/* CTA 섹션 스타일 */
+.cta-section {
+  background-color: var(--primary-color);
+  padding: 4rem 2rem;
+  text-align: center;
+  border-radius: var(--border-radius);
+  margin: 3rem 0;
+  color: white;
+}
+
+.cta-section h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: white;
+}
+
+.cta-section .bullet-btn {
+  background-color: white;
+  color: var(--primary-color);
+  font-weight: 700;
+  margin-top: 1rem;
+}
+
+.cta-section .bullet-btn:hover {
+  background-color: var(--light-yellow);
+}
+
+/* 특별 효과 - 한글 강조 표시 */
+.korean-highlight {
+  position: relative;
+  display: inline-block;
+  padding: 0 5px;
+}
+
+.korean-highlight::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  background-color: var(--light-yellow);
+  z-index: -1;
+  border-radius: 4px;
+}
+
+/* 플래시카드 효과 */
+.flashcard {
+  perspective: 1000px;
+  height: 180px;
+  margin: 1.5rem 0;
+  cursor: pointer;
+}
+
+.flashcard-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-radius: var(--border-radius);
+}
+
+.flashcard:hover .flashcard-inner {
+  transform: rotateY(180deg);
+}
+
+.flashcard-front, .flashcard-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: var(--border-radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  padding: 1rem;
+}
+
+.flashcard-front {
+  background-color: white;
+  color: var(--text-color);
+}
+
+.flashcard-back {
+  background-color: var(--accent-color);
+  color: white;
+  transform: rotateY(180deg);
+}
